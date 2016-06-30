@@ -238,6 +238,19 @@
 
 #pragma mark -
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:_alertView];
+    if (![_alertView pointInside:point withEvent:nil]) {
+        [self popOut:^{
+            [_selectedDataArray removeAllObjects];
+            [self removeFromSuperview];
+        }];
+    }
+    
+}
+
 - (void)btnAction:(UIButton *)btn {
     [self popOut:^{
         
@@ -252,6 +265,7 @@
             [_delegate performSelector:@selector(didSelectBtn:data:) withObject:isConfirmBtn withObject:_selectedDataArray];
         }
         
+        [_selectedDataArray removeAllObjects];
         [self removeFromSuperview];
         
     }];

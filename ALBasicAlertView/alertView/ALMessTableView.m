@@ -42,6 +42,9 @@ static NSString *cellId = @"cellId";
  
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     cell.ALMessData = _dataArray[indexPath.row];
+    cell.block = ^{
+        _addSelectedObjBlock(_dataArray[indexPath.row]);
+    };
     return cell;
     
 }
@@ -53,7 +56,6 @@ static NSString *cellId = @"cellId";
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     BOOL isSelected = ![cell.isDataSelected boolValue];
     cell.isDataSelected = @(isSelected);
-    _addSelectedObjBlock(_dataArray[indexPath.row]);
     
 }
 

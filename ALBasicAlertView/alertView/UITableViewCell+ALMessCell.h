@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^SelectedChangeBlock)(void);
 @interface UITableViewCell (ALMessCell)
 
 @property (nonatomic, strong) id ALMessData;
 @property (nonatomic, strong) NSNumber *isDataSelected;
+@property (nonatomic, copy) SelectedChangeBlock block;
 
 @end

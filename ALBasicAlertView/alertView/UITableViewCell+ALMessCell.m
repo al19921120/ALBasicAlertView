@@ -11,19 +11,29 @@
 
 static const void *messDataKey = &messDataKey;
 static const void *isDataSelectedKey = &isDataSelectedKey;
+static const void *blockKey = &blockKey;
 
 @implementation UITableViewCell (ALMessCell)
 
 @dynamic ALMessData;
 
+- (SelectedChangeBlock)block {
+    return objc_getAssociatedObject(self, blockKey);
+}
+
+- (void)setBlock:(SelectedChangeBlock)block {
+    objc_setAssociatedObject(self, blockKey, block, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
 
 - (NSNumber *)isDataSelected {
     return objc_getAssociatedObject(self, isDataSelectedKey);
 }
 
 - (void)setIsDataSelected:(NSNumber *)isDataSelected {
-    //override
     objc_setAssociatedObject(self, isDataSelectedKey, isDataSelected, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    if (self.block) {
+        self.block();
+    }
 }
 
 - (id)ALMessData {

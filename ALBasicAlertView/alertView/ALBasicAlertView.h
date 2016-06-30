@@ -43,7 +43,7 @@ typedef void(^ConfirmBlock)(void);
 
 - (instancetype)initWithFrame:(CGRect)frame alertBounds:(CGRect)alertBounds titleSetting:(ALAlertDataModel *)titleModel messageSetting:(ALAlertDataModel *)messageModel confirmSetting:(ALAlertDataModel *)confirmModel cancelSetting:(ALAlertDataModel *)cancelModel type:(ALAlertViewType)type;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, weak) id<ALBasicAlertViewProtocol> delegate;
 
 @property (nonatomic, weak, readonly) UIView *alertView;
 
