@@ -42,8 +42,9 @@ static NSString *cellId = @"cellId";
  
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     cell.ALMessData = _dataArray[indexPath.row];
+    __weak UITableViewCell *cellWeak = cell;
     cell.block = ^{
-        _addSelectedObjBlock(_dataArray[indexPath.row]);
+        _addSelectedObjBlock(_dataArray[indexPath.row], cellWeak.isDataSelected);
     };
     return cell;
     
@@ -56,6 +57,20 @@ static NSString *cellId = @"cellId";
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     BOOL isSelected = ![cell.isDataSelected boolValue];
     cell.isDataSelected = @(isSelected);
+    if ([_isMultiSelection boolValue]) {
+        return;
+    }
+    
+    for (NSInteger i = 0; i < _dataArray.count; i++) {
+        NSIndexPath *idx = [NSIndexPath indexPathForRow:i inSection:0];
+        if (i == indexPath.row) {
+            return;
+        }
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:idx];
+        cell.isDataSelected = @0;
+    }
+
+    
     
 }
 

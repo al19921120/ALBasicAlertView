@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^AddSelectedObjBlock)(id);
+typedef void(^AddSelectedObjBlock)(id, NSNumber*);
 @interface ALMessTableView : UITableView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSNumber *isMultiSelection;
 @property (nonatomic, copy) AddSelectedObjBlock addSelectedObjBlock;
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style cellName:(NSString *)cellName;

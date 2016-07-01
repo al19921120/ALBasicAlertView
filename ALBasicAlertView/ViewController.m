@@ -65,6 +65,7 @@
     
     _messModel.mess = @"TableViewCell";
     _messModel.data = @[@1,@2,@3];
+    _messModel.isMultiSelection = @1;
     
     ALBasicAlertView *alert = [[ALBasicAlertView alloc] initWithFrame:[UIScreen mainScreen].bounds alertBounds:CGRectMake(10, 100, __kScreenWidth-10, 200) titleSetting:_titleModel messageSetting:_messModel confirmSetting:_confirmModel cancelSetting:nil type:ALAlertViewTypeList];
     alert.delegate = self;

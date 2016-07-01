@@ -34,6 +34,7 @@ static const void *blockKey = &blockKey;
     if (self.block) {
         self.block();
     }
+    [self setNeedsLayout];
 }
 
 - (id)ALMessData {

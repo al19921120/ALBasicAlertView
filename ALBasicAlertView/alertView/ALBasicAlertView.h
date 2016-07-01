@@ -29,6 +29,9 @@ typedef void(^ConfirmBlock)(void);
 
 @property (nonatomic, strong) NSArray *data;
 
+//list only
+@property (nonatomic, strong) NSNumber *isMultiSelection;
+
 + (instancetype)getBasicModel;
 
 @end

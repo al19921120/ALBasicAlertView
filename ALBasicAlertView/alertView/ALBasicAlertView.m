@@ -221,16 +221,25 @@
     sepLine.backgroundColor = alertBackgroundColor.CGColor;
     [_topView.layer addSublayer:sepLine];
     
-    ALMessTableView *messTableView = [[ALMessTableView alloc] initWithFrame:CGRectMake(horizonSpace, messTop, _alertWidth - 2*horizonSpace, messHeight) style:UITableViewStylePlain cellName:_messModel.mess];
+    ALMessTableView *messTableView = [[ALMessTableView alloc] initWithFrame:CGRectMake(0, messTop, _alertWidth, messHeight) style:UITableViewStylePlain cellName:_messModel.mess];
+    messTableView.isMultiSelection = _messModel.isMultiSelection;
     messTableView.dataArray = _messModel.data;
-    messTableView.addSelectedObjBlock = ^(id obj){
+    messTableView.addSelectedObjBlock = ^(id obj, NSNumber *isCellSelected){
         
-        if ([_selectedDataArray containsObject:obj]) {
-            [_selectedDataArray removeObject:obj];
-        }
-        else {
+        if ([isCellSelected boolValue]) {
             [_selectedDataArray addObject:obj];
         }
+        else {
+            [_selectedDataArray removeObject:obj];
+        }
+        
+//        
+//        if ([_selectedDataArray containsObject:obj]) {
+//            [_selectedDataArray removeObject:obj];
+//        }
+//        else {
+//            [_selectedDataArray addObject:obj];
+//        }
     };
     [_topView addSubview:messTableView];
     
