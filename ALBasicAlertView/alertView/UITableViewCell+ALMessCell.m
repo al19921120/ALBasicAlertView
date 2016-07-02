@@ -43,7 +43,7 @@ static const void *blockKey = &blockKey;
 
 - (void)setALMessData:(id)ALMessData {
     
-    objc_setAssociatedObject(self, messDataKey, ALMessData, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self, messDataKey, ALMessData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self setNeedsLayout];
     
 }
