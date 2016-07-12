@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ALTypeViewProtocol.h"
 
-typedef void(^AddSelectedObjBlock)(id, NSNumber*);
 @interface ALMessTableView : UITableView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) NSNumber *isMultiSelection;
-@property (nonatomic, copy) AddSelectedObjBlock addSelectedObjBlock;
+@property (nonatomic, weak) id<ALTypeViewProtocol> alDelegate;
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style cellName:(NSString *)cellName;
 

@@ -9,6 +9,7 @@
 
 #import "ALBasicAlertView.h"
 #import "ALMessTableView.h"
+#import "ALMessTextField.h"
 
 @implementation ALAlertDataModel
 
@@ -77,11 +78,12 @@
         _messModel = messageModel;
         _confirmModel = confirmModel;
         _cancelModel = cancelModel;
+        _type = type;
         
         [self initAlertViewWithFrame:alertBounds];
         [self initBasicView];
         
-        switch (type) {
+        switch (_type) {
             case ALAlertViewTypeNormal:
                 [self normalType];
                 break;
@@ -90,6 +92,9 @@
                 break;
             case ALAlertViewTypeList:
                 [self listType];
+                break;
+            case ALAlertViewTypeInput:
+                [self inputType];
                 break;
             default:
                 break;
@@ -100,10 +105,16 @@
     return self;
 }
 
+- (void)removeFromSuperview {
+    
+    [self removeNotifacition];
+    [super removeFromSuperview];
+}
+
 - (void)initAlertViewWithFrame:(CGRect)frame {
     
-    NSUInteger alertViewX = (CGRectGetWidth(self.frame) - frame.size.width)/2;
-    NSUInteger alertViewY = (CGRectGetHeight(self.frame) - frame.size.height)/2 - 32;
+    CGFloat alertViewX = (CGRectGetWidth(self.frame) - frame.size.width)/2;
+    CGFloat alertViewY = (CGRectGetHeight(self.frame) - frame.size.height)/2 - 32;
 
     UIView *alertView = [[UIView alloc] initWithFrame:CGRectMake(alertViewX, alertViewY, frame.size.width, frame.size.height)];
     alertView.layer.cornerRadius = 5;
@@ -224,30 +235,41 @@
     ALMessTableView *messTableView = [[ALMessTableView alloc] initWithFrame:CGRectMake(0, messTop, _alertWidth, messHeight) style:UITableViewStylePlain cellName:_messModel.mess];
     messTableView.isMultiSelection = _messModel.isMultiSelection;
     messTableView.dataArray = _messModel.data;
-    messTableView.addSelectedObjBlock = ^(id obj, NSNumber *isCellSelected){
-        
-        if ([isCellSelected boolValue]) {
-            [_selectedDataArray addObject:obj];
-        }
-        else {
-            [_selectedDataArray removeObject:obj];
-        }
-        
-//        
-//        if ([_selectedDataArray containsObject:obj]) {
-//            [_selectedDataArray removeObject:obj];
-//        }
-//        else {
-//            [_selectedDataArray addObject:obj];
-//        }
-    };
+    messTableView.alDelegate = self;
     [_topView addSubview:messTableView];
+    
+}
+
+- (void)inputType {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyBoradWasShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyBoardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+
+    
+    [self initTitleLabel];
+    
+    CGFloat textFieldHeight = 44;
+    CGFloat messTop = (CGRectGetHeight(_topView.frame) - 44 ) / 2.0 + 10;
+
+    
+    ALMessTextField *textField = [[ALMessTextField alloc] initWithFrame:CGRectMake(horizonSpace, messTop, _alertWidth - 2*horizonSpace, textFieldHeight)];
+    textField.placeholder = _messModel.mess;
+    textField.textColor = _messModel.color;
+    textField.alDelegate = self;
+    [_topView addSubview:textField];
     
 }
 
 #pragma mark -
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:_alertView];
@@ -261,6 +283,9 @@
 }
 
 - (void)btnAction:(UIButton *)btn {
+    
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    
     [self popOut:^{
         
         NSNumber *isConfirmBtn = @1;
@@ -280,7 +305,59 @@
     }];
 }
 
-#pragma mark -
+#pragma mark - alDelegate
+
+- (void)didAddObj:(NSObject *)obj status:(NSNumber *)status {
+    
+    switch (_type) {
+        case ALAlertViewTypeList:
+            if ([status boolValue]) {
+                [_selectedDataArray addObject:obj];
+            }
+            else {
+                [_selectedDataArray removeObject:obj];
+            }
+            break;
+            
+        case ALAlertViewTypeInput:
+            [_selectedDataArray removeAllObjects];
+            [_selectedDataArray addObject:obj];
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+}
+
+#pragma mark - animate
+
+- (void)alertViewMoveAdistance:(CGFloat)distance isUpward:(BOOL)isUpward {
+    
+    CGFloat yDistance = 0;
+    if (isUpward) {
+        
+        CGFloat alertBottom = CGRectGetHeight(self.frame) - _alertView.frame.origin.y - _alertView.frame.size.height;
+        if (alertBottom < distance) {
+            yDistance = distance - alertBottom;
+        }
+        
+    }
+    else {
+
+    }
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        CGFloat alertViewX = _alertView.frame.origin.x;
+        CGFloat alertViewY = (CGRectGetHeight(self.frame) - _alertView.frame.size.height)/2 - 32 - yDistance;
+        _alertView.frame = CGRectMake(alertViewX, alertViewY, _alertWidth, _alertHeight);
+        
+    }];
+    
+    
+}
 
 - (void)popIn {
     
@@ -319,12 +396,40 @@
     return animePopIn;
 }
 
-#pragma mark - 
 
 
+#pragma mark - keyBoard
+
+- (void)removeNotifacition {
+    
+    if (_type == ALAlertViewTypeInput) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+    
+}
+
+- (void)keyBoradWasShow:(NSNotification *)aNotification {
+    
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    [self alertViewMoveAdistance:kbSize.height isUpward:YES];
+
+    
+}
+
+- (void)keyBoardWillHide:(NSNotification *)aNotification {
+    
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    [self alertViewMoveAdistance:kbSize.height isUpward:NO];
+    
+}
+
+#pragma mark -
 
 - (void)dealloc {
-//    NSLog(@"** - dealloc - %@ - **", NSStringFromClass([self class]));
+
+    NSLog(@"** - dealloc - %@ - **", NSStringFromClass([self class]));
 }
 
 @end

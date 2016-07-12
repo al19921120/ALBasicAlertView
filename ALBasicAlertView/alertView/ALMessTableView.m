@@ -42,10 +42,7 @@ static NSString *cellId = @"cellId";
  
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     cell.ALMessData = _dataArray[indexPath.row];
-    __weak UITableViewCell *cellWeak = cell;
-    cell.block = ^{
-        _addSelectedObjBlock(_dataArray[indexPath.row], cellWeak.isDataSelected);
-    };
+    cell.alDelegate = self.alDelegate;
     return cell;
     
 }

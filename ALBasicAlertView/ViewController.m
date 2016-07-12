@@ -74,6 +74,18 @@
     
 }
 
+- (IBAction)showInputAlertView:(id)sender {
+    
+    _messModel.color = [UIColor blueColor];
+    ALBasicAlertView *alert = [[ALBasicAlertView alloc] initWithFrame:[UIScreen mainScreen].bounds alertBounds:CGRectMake(10, 100, __kScreenWidth-10, 200) titleSetting:_titleModel messageSetting:_messModel confirmSetting:_confirmModel cancelSetting:_cancelModel type:ALAlertViewTypeInput];
+    alert.delegate = self;
+    [self.view addSubview:alert];
+    [alert popIn];
+    
+    
+    
+}
+
 - (void)didSelectBtn:(NSNumber *)isConfirmBtn data:(NSArray *)returnArr {
     
     if ([isConfirmBtn boolValue]) {

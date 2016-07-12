@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		894372B81D348F5400CD5D46 /* ALMessTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 894372B71D348F5400CD5D46 /* ALMessTextField.m */; };
 		89EC72FE1D24FAF100FB206C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EC72FD1D24FAF100FB206C /* main.m */; };
 		89EC73011D24FAF100FB206C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EC73001D24FAF100FB206C /* AppDelegate.m */; };
 		89EC73041D24FAF100FB206C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EC73031D24FAF100FB206C /* ViewController.m */; };
@@ -40,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		894372B61D348F5400CD5D46 /* ALMessTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALMessTextField.h; sourceTree = "<group>"; };
+		894372B71D348F5400CD5D46 /* ALMessTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALMessTextField.m; sourceTree = "<group>"; };
+		894372B91D34BE4700CD5D46 /* ALTypeViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTypeViewProtocol.h; sourceTree = "<group>"; };
 		89EC72F91D24FAF100FB206C /* ALBasicAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALBasicAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EC72FD1D24FAF100FB206C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		89EC72FF1D24FAF100FB206C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -171,10 +175,13 @@
 			children = (
 				89EC733F1D25000E00FB206C /* ALBasicAlertView.h */,
 				89EC73401D25000E00FB206C /* ALBasicAlertView.m */,
+				894372B61D348F5400CD5D46 /* ALMessTextField.h */,
+				894372B71D348F5400CD5D46 /* ALMessTextField.m */,
 				89EC73411D25000E00FB206C /* ALMessTableView.h */,
 				89EC73421D25000E00FB206C /* ALMessTableView.m */,
 				89EC73431D25000E00FB206C /* UITableViewCell+ALMessCell.h */,
 				89EC73441D25000E00FB206C /* UITableViewCell+ALMessCell.m */,
+				894372B91D34BE4700CD5D46 /* ALTypeViewProtocol.h */,
 			);
 			path = alertView;
 			sourceTree = "<group>";
@@ -312,6 +319,7 @@
 			files = (
 				89EC73451D25000E00FB206C /* ALBasicAlertView.m in Sources */,
 				89EC733D1D24FB8600FB206C /* TableViewCell.m in Sources */,
+				894372B81D348F5400CD5D46 /* ALMessTextField.m in Sources */,
 				89EC73461D25000E00FB206C /* ALMessTableView.m in Sources */,
 				89EC73041D24FAF100FB206C /* ViewController.m in Sources */,
 				89EC73011D24FAF100FB206C /* AppDelegate.m in Sources */,
