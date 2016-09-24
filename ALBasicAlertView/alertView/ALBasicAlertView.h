@@ -42,7 +42,7 @@ typedef void(^ConfirmBlock)(void);
 
 @optional
 - (void)didSelectBtn:(NSNumber *)isConfirmBtn data:(NSArray *)returnArr;
-- (void)alalertView:(ALBasicAlertView *)alAlertView data:(NSDictionary *)returnDic;
+- (void)alalertView:(ALBasicAlertView *)alAlertView didSelectdata:(NSDictionary *)returnDic;
 
 @end
 

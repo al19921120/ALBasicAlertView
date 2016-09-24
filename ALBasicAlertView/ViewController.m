@@ -100,7 +100,7 @@
 //    }
 //}
 
-- (void)alalertView:(ALBasicAlertView *)alAlertView data:(NSDictionary *)returnDic {
+- (void)alalertView:(ALBasicAlertView *)alAlertView didSelectdata:(NSDictionary *)returnDic {
     
     NSLog(@"alView:%@, \n data:%@",alAlertView, returnDic);
     

@@ -299,8 +299,8 @@
         if ([_delegate respondsToSelector:@selector(didSelectBtn:data:)]) {
             [_delegate performSelector:@selector(didSelectBtn:data:) withObject:isConfirmBtn withObject:_selectedDataArray];
         }
-        if ([_delegate respondsToSelector:@selector(alalertView:data:)]) {
-            [_delegate performSelector:@selector(alalertView:data:) withObject:self
+        if ([_delegate respondsToSelector:@selector(alalertView:didSelectdata:)]) {
+            [_delegate performSelector:@selector(alalertView:didSelectdata:) withObject:self
                                                                     withObject:@{
                                                                                     @"isConfirmBtn":isConfirmBtn,
                                                                                     @"selectedDataArray":_selectedDataArray
