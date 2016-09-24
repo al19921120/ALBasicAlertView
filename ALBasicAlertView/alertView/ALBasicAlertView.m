@@ -10,6 +10,7 @@
 #import "ALBasicAlertView.h"
 #import "ALMessTableView.h"
 #import "ALMessTextField.h"
+#import <objc/message.h>
 
 @implementation ALAlertDataModel
 
@@ -298,6 +299,14 @@
         if ([_delegate respondsToSelector:@selector(didSelectBtn:data:)]) {
             [_delegate performSelector:@selector(didSelectBtn:data:) withObject:isConfirmBtn withObject:_selectedDataArray];
         }
+        if ([_delegate respondsToSelector:@selector(alalertView:data:)]) {
+            [_delegate performSelector:@selector(alalertView:data:) withObject:self
+                                                                    withObject:@{
+                                                                                    @"isConfirmBtn":isConfirmBtn,
+                                                                                    @"selectedDataArray":_selectedDataArray
+                                                                                }];
+        }
+        
         
         [_selectedDataArray removeAllObjects];
         [self removeFromSuperview];

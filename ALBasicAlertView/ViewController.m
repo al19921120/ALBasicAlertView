@@ -48,6 +48,7 @@
     
     ALBasicAlertView *alert = [[ALBasicAlertView alloc] initWithFrame:[UIScreen mainScreen].bounds alertBounds:CGRectMake(10, 100, __kScreenWidth-10, 200) titleSetting:_titleModel messageSetting:_messModel confirmSetting:_confirmModel cancelSetting:_cancelModel type:ALAlertViewTypeNormal];
     alert.delegate = self;
+    alert.tag = 10;
     [self.view addSubview:alert];
     [alert popIn];
     
@@ -57,6 +58,7 @@
 - (IBAction)showOnlyTextAlertView:(id)sender {
     ALBasicAlertView *alert = [[ALBasicAlertView alloc] initWithFrame:[UIScreen mainScreen].bounds alertBounds:CGRectMake(10, 100, __kScreenWidth-10, 200) titleSetting:_titleModel messageSetting:_messModel confirmSetting:_confirmModel cancelSetting:_cancelModel type:ALAlertViewTypeOnlyText];
     alert.delegate = self;
+    alert.tag = 11;
     [self.view addSubview:alert];
     [alert popIn];
     
@@ -68,6 +70,7 @@
     _messModel.isMultiSelection = @1;
     
     ALBasicAlertView *alert = [[ALBasicAlertView alloc] initWithFrame:[UIScreen mainScreen].bounds alertBounds:CGRectMake(10, 100, __kScreenWidth-10, 200) titleSetting:_titleModel messageSetting:_messModel confirmSetting:_confirmModel cancelSetting:nil type:ALAlertViewTypeList];
+    alert.tag = 12;
     alert.delegate = self;
     [self.view addSubview:alert];
     [alert popIn];
@@ -78,6 +81,7 @@
     
     _messModel.color = [UIColor blueColor];
     ALBasicAlertView *alert = [[ALBasicAlertView alloc] initWithFrame:[UIScreen mainScreen].bounds alertBounds:CGRectMake(10, 100, __kScreenWidth-10, 200) titleSetting:_titleModel messageSetting:_messModel confirmSetting:_confirmModel cancelSetting:_cancelModel type:ALAlertViewTypeInput];
+    alert.tag = 13;
     alert.delegate = self;
     [self.view addSubview:alert];
     [alert popIn];
@@ -86,14 +90,20 @@
     
 }
 
-- (void)didSelectBtn:(NSNumber *)isConfirmBtn data:(NSArray *)returnArr {
+//- (void)didSelectBtn:(NSNumber *)isConfirmBtn data:(NSArray *)returnArr {
+//    
+//    if ([isConfirmBtn boolValue]) {
+//        NSLog(@"press confirm %@",returnArr);
+//    }
+//    else {
+//        NSLog(@"press cancel");
+//    }
+//}
+
+- (void)alalertView:(ALBasicAlertView *)alAlertView data:(NSDictionary *)returnDic {
     
-    if ([isConfirmBtn boolValue]) {
-        NSLog(@"press confirm %@",returnArr);
-    }
-    else {
-        NSLog(@"press cancel");
-    }
+    NSLog(@"alView:%@, \n data:%@",alAlertView, returnDic);
+    
 }
 
 @end

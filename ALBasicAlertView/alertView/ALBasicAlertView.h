@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, ALAlertViewType) {
 };
 
 typedef void(^ConfirmBlock)(void);
-
+@class ALBasicAlertView;
 
 @interface ALAlertDataModel : NSObject
 
@@ -40,7 +40,9 @@ typedef void(^ConfirmBlock)(void);
 
 @protocol ALBasicAlertViewProtocol <NSObject>
 
+@optional
 - (void)didSelectBtn:(NSNumber *)isConfirmBtn data:(NSArray *)returnArr;
+- (void)alalertView:(ALBasicAlertView *)alAlertView data:(NSDictionary *)returnDic;
 
 @end
 
