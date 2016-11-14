@@ -61,14 +61,23 @@
                                     <action selector="showInputAlertView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zPl-sv-VjH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-5o-DEP">
+                                <rect key="frame" x="270" y="217" width="60" height="30"/>
+                                <state key="normal" title="详情弹窗"/>
+                                <connections>
+                                    <action selector="showDetailAlertView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wej-t9-xBw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lgU-83-U6R" firstAttribute="top" secondItem="kKE-7R-QjH" secondAttribute="bottom" constant="25" id="03s-SJ-Jbp"/>
                             <constraint firstItem="lgU-83-U6R" firstAttribute="centerX" secondItem="kKE-7R-QjH" secondAttribute="centerX" id="FPy-ES-LdY"/>
+                            <constraint firstItem="F3a-5o-DEP" firstAttribute="top" secondItem="YIh-Xt-4eV" secondAttribute="bottom" constant="8" id="HAS-Cj-Aqo"/>
                             <constraint firstItem="YIh-Xt-4eV" firstAttribute="top" secondItem="CF8-GX-UuD" secondAttribute="bottom" constant="14" id="ORf-Lo-QTT"/>
                             <constraint firstItem="CF8-GX-UuD" firstAttribute="top" secondItem="lgU-83-U6R" secondAttribute="bottom" constant="22" id="PpN-tg-zCa"/>
                             <constraint firstItem="YIh-Xt-4eV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="1" id="aD4-qv-BTf"/>
+                            <constraint firstItem="F3a-5o-DEP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d3U-Ud-xHq"/>
                             <constraint firstItem="CF8-GX-UuD" firstAttribute="centerX" secondItem="lgU-83-U6R" secondAttribute="centerX" id="dtW-rH-m0g"/>
                             <constraint firstItem="kKE-7R-QjH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="iKC-fP-Jri"/>
                             <constraint firstItem="kKE-7R-QjH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zcc-TO-030"/>

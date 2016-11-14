@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ALBasicAlertView.h"
+#import "ALDetailAlertView.h"
 
 @interface ViewController () <ALBasicAlertViewProtocol>
 
@@ -88,6 +89,30 @@
     
     
     
+}
+
+- (IBAction)showDetailAlertView:(id)sender {
+    
+    UIButton *btn = (UIButton *)sender;
+    
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
+    lab.text = @"123123";
+    
+    ALDetailAlertView *alert = [[ALDetailAlertView alloc] initWithFrame:CGRectMake(btn.frame.origin.x, btn.frame.origin.y, 200, 130) subView:lab];
+    NSLog(@"%@", alert);
+    alert.tag = 14;
+    [self.view addSubview:alert];
+    [alert popInFrom:btn.frame.origin orientation:ALDetailAlertOrientationUp];
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    ALDetailAlertView *alert = [self.view viewWithTag:14];
+    [alert popOut:^{
+        
+    }];
+    [alert removeFromSuperview];
 }
 
 //- (void)didSelectBtn:(NSNumber *)isConfirmBtn data:(NSArray *)returnArr {
